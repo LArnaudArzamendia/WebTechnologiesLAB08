@@ -1,0 +1,24 @@
+<%= form_with(model: chat, local: true) do |form| %>
+  <% if chat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+      <ul>
+        <% chat.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :sender_id %>
+    <%= form.collection_select :sender_id, User.all, :id, :email, prompt: "Select Sender" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :receiver_id %>
+    <%= form.collection_select :receiver_id, User.all, :id, :email, prompt: "Select Receiver" %>
+  </div>
+
+  <%= form.submit "Create Chat", class: "btn btn-primary" %>
+<% end %>

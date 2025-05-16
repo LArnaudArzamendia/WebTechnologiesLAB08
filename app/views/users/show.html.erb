@@ -4,4 +4,6 @@
 <p><strong>Email:</strong> <%= @user.email %></p>
 <p><strong>Full Name:</strong> <%= "#{@user.first_name} #{@user.last_name}" %></p>
 
-<%= link_to 'Back to Users', users_path %>
+<%= link_to 'Back to Users', users_path %> |
+
+<%= link_to 'Add new user', new_user_path %>
