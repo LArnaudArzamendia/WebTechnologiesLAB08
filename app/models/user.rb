@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     # ASSOCIATIONS
     # A user can send many messages..
-    has_many :messages
+    has_many :messages, foreign_key: :user_id
 
     # A user can be the sender of many chats.
     has_many :sent_chats, class_name: "Chat", foreign_key: "sender_id"

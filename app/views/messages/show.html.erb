@@ -1,10 +1,14 @@
 <h1>Message Details</h1>
 
-<p><strong>ID:</strong> <%= @message.id %></p>
-<p><strong>Chat ID:</strong> <%= @message.chat_id %></p>
-<p><strong>User ID:</strong> <%= @message.user_id %></p>
+<p><strong>Author:</strong> <%= @message.user.first_name %> <%= @message.user.last_name %></p>
+<p><strong>Chat:</strong>
+  Chat between <%= @message.chat.sender.first_name %> <%= @message.chat.sender.last_name %> and <%= @message.chat.receiver.first_name %> <%= @message.chat.receiver.last_name %>
+  (<%= link_to "View Chat", chat_path(@message.chat) %>)
+</p>
 <p><strong>Body:</strong> <%= @message.body %></p>
 
-<%= link_to 'Back to Messages', messages_path %> |
+<hr>
 
-<%= link_to 'Write new message', new_message_path %>
+<%= link_to 'Back to Messages', messages_path %> |
+<%= link_to 'Edit Message', edit_message_path(@message) %> |
+<%= link_to 'Write New Message', new_message_path %>

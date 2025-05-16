@@ -1,9 +1,33 @@
 <h1>Chat Details</h1>
 
-<p><strong>ID:</strong> <%= @chat.id %></p>
-<p><strong>Sender ID:</strong> <%= @chat.sender_id %></p>
-<p><strong>Receiver ID:</strong> <%= @chat.receiver_id %></p>
+<p><strong>Chat ID:</strong> <%= @chat.id %></p>
+<p><strong>Sender:</strong> <%= @chat.sender.first_name %> <%= @chat.sender.last_name %></p>
+<p><strong>Receiver:</strong> <%= @chat.receiver.first_name %> <%= @chat.receiver.last_name %></p>
+
+<hr>
+
+<h2>Messages</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Author</th>
+      <th>Body</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chat.messages.each do |message| %>
+      <tr>
+        <td><%= message.user.first_name %> <%= message.user.last_name %></td>
+        <td><%= message.body %></td>
+        <td><%= link_to 'View Message', message_path(message) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
 
 <%= link_to 'Back to Chats', chats_path %> |
-
-<%= link_to 'Start new chat', new_chat_path %>
+<%= link_to 'Edit Chat', edit_chat_path(@chat) %> |
+<%= link_to 'Start New Chat', new_chat_path %>

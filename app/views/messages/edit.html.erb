@@ -1,0 +1,8 @@
+<h1>Edit Message</h1>
+
+<%= render 'form', message: @message %>
+
+<hr>
+
+<%= link_to 'Back to Messages', messages_path %> |
+<%= link_to 'Back To Message Details', message_path(@message) %>

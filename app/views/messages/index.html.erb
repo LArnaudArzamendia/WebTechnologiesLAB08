@@ -2,9 +2,9 @@
 
 <table>
   <tr>
-    <th>ID</th>
+    <th>Message ID</th>
     <th>Chat ID</th>
-    <th>User ID</th>
+    <th>Author</th>
     <th>Body</th>
     <th>Actions</th>
   </tr>
@@ -13,11 +13,13 @@
     <tr>
       <td><%= message.id %></td>
       <td><%= message.chat_id %></td>
-      <td><%= message.user_id %></td>
+      <td><%= message.user.first_name %> <%= message.user.last_name %></td>
       <td><%= message.body %></td>
-      <td><%= link_to 'Show', message_path(message) %></td>
+      <td><%= link_to 'Show', message_path(message) %> | <%= link_to 'Edit', edit_message_path(message) %></td>
     </tr>
   <% end %>
 </table>
 
-<%= link_to 'Write new message', new_message_path, class: "btn btn-primary" %>
+<hr>
+
+<%= link_to 'Write New Message', new_message_path, class: "btn btn-primary" %>

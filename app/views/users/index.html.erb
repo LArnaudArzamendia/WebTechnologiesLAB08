@@ -2,10 +2,11 @@
 
 <table>
   <tr>
-    <th>ID</th>
+    <th>User ID</th>
     <th>Email</th>
     <th>First Name</th>
     <th>Last Name</th>
+    <th>Total Messages</th>
     <th>Actions</th>
   </tr>
 
@@ -15,9 +16,12 @@
       <td><%= user.email %></td>
       <td><%= user.first_name %></td>
       <td><%= user.last_name %></td>
-      <td><%= link_to 'Show', user_path(user) %></td>
+      <td><%= user.messages.count %></td>
+      <td><%= link_to 'Show', user_path(user) %> | <%= link_to 'Edit', edit_user_path(user) %></td>
     </tr>
   <% end %>
 </table>
 
-<%= link_to 'Add new user', new_user_path, class: "btn btn-primary" %>
+<hr>
+
+<%= link_to 'Add New User', new_user_path, class: "btn btn-primary" %>

@@ -1,9 +1,35 @@
 <h1>User Details</h1>
 
-<p><strong>ID:</strong> <%= @user.id %></p>
+<p><strong>User ID:</strong> <%= @user.id %></p>
 <p><strong>Email:</strong> <%= @user.email %></p>
 <p><strong>Full Name:</strong> <%= "#{@user.first_name} #{@user.last_name}" %></p>
 
-<%= link_to 'Back to Users', users_path %> |
+<hr>
 
-<%= link_to 'Add new user', new_user_path %>
+<h2>Chats</h2>
+<ul>
+  <% Chat.where("sender_id = ? OR receiver_id = ?", @user.id, @user.id).each do |chat| %>
+    <li>
+      Chat between <%= chat.sender.first_name %> <%= chat.sender.last_name %> and <%= chat.receiver.first_name %> <%= chat.receiver.last_name %>
+      (<%= link_to "View Chat", chat_path(chat) %>)
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<h2>Messages Sent</h2>
+<ul>
+  <% @user.messages.each do |message| %>
+    <li>
+      In Chat #<%= message.chat.id %>: <%= truncate(message.body, length: 100) %>
+      (<%= link_to "View Message", message_path(message) %>)
+    </li>
+  <% end %>
+</ul>
+
+<hr>
+
+<%= link_to 'Back to Users', users_path %> |
+<%= link_to 'Edit User', edit_user_path(@user) %> |
+<%= link_to 'Add New User', new_user_path %>
