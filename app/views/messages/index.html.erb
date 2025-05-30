@@ -15,7 +15,7 @@
       <td><%= message.chat_id %></td>
       <td><%= message.user.first_name %> <%= message.user.last_name %></td>
       <td><%= message.body %></td>
-      <td><%= link_to 'Show', message_path(message) %> | <%= link_to 'Edit', edit_message_path(message) %></td>
+      <td><%= link_to 'Show', message_path(message) %> | <% if can? :edit, message %><%= link_to 'Edit', edit_message_path(message) %><% else %>Cannot Edit<% end %></td>
     </tr>
   <% end %>
 </table>

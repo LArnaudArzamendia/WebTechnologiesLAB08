@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+    before_action :authenticate_user!
+    load_and_authorize_resource
+
     def index
         @messages = Message.all
     end
@@ -13,6 +16,7 @@ class MessagesController < ApplicationController
 
     def create
         @message = Message.new(message_params)
+        @message.user = current_user
         if @message.save
             redirect_to @message, notice: "Message was successfully send!"
         else
@@ -31,6 +35,12 @@ class MessagesController < ApplicationController
         else
             render :edit, status: :unprocessable_entity
         end
+    end
+
+    def destroy
+        @message = Message.find(params[:id])
+        @message.destroy
+        redirect_to messages_path, notice: "Message deleted!"
     end
 
     private

@@ -10,5 +10,6 @@
 <hr>
 
 <%= link_to 'Back to Messages', messages_path %> |
-<%= link_to 'Edit Message', edit_message_path(@message) %> |
+<% if can? :edit, @message %><%= link_to 'Edit Message', edit_message_path(@message) %><% else %>Cannot Edit<% end %> |
+<% if can? :destroy, @message %><%= link_to 'Delete', message_path(@message), method: :delete,data: { confirm: 'Are you sure?' } %><% else %>Cannot Delete<% end %> |
 <%= link_to 'Write New Message', new_message_path %>
